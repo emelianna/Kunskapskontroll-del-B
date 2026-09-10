@@ -32,6 +32,16 @@ class Student
     oldCourse.Remove(this); //Anropar kursens Removemetod som tar bort studenten ur kursens studentlista
     }
 }
+
+public void Schedule()
+    {
+        Console.WriteLine($"{Name} går dessa kurser: ");
+
+        foreach (Course course in Courses)
+        {
+            Console.WriteLine($"- {course.Name}");
+        }
+    }
 }
 
 
