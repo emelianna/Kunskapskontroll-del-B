@@ -9,46 +9,39 @@ class Course
         MaxSeats = maxSeats;
     }
 
-
-    public List<Student> students = []; //Lista med studenter
-
-
+    public List<Student> Students = []; //Lista med studenter
 
     public void Enroll(Student newStudent) //Lägger till student
     {
-         if (!students.Contains(newStudent) && MaxSeats - students.Count > 0) //Bara om personen inte redan är med
-                                                                               //och om det finns platser kvar  
+        if (!Students.Contains(newStudent) && MaxSeats - Students.Count > 0) //Bara om personen inte redan är med
+                                                                                //och om det finns platser kvar
         {
-            students.Add(newStudent);
-            // oldStudent.Join(this); //Senare, när metoden Join är skapad i Student-klassen
-           
+            Students.Add(newStudent); //Ny student läggs till i studentlistan
+            newStudent.Join(this); //Anropar studentens Join-metod, som lägger till kursen i studentens Courses-lista     
         }
     }
+
     public void Remove(Student oldStudent) //Tar bort student
     {
-         if (students.Contains(oldStudent))
-
+        if (Students.Contains(oldStudent))
         {
-              students.Remove(oldStudent);
-            // newStudent.Leave(this); //Senare, när metoden Leave är skapad i Student-klassen
+           Students.Remove(oldStudent); //Studenten tas bort ur kursens egen studentlista
+           oldStudent.Leave(this); //Anropar studentens Leavemetod som tar bort kursen ur studentens kurslista
         }
     }
 
-    public void RollCall()
+    public void RollCall() //Listar studenter som läser kursen
     {
         Console.WriteLine("Studerande i denna kurs är:");
 
-        foreach (Student student in students)
+        foreach (Student student in Students)
         {
-           Console.WriteLine($"- {student.Name}");
+            Console.WriteLine($"- {student.Name}");
         }
+    }
 
-    
-}
-    
-
-    public override string ToString()
+    public override string ToString() //Gör ett objekt utskrivbart genom att skriva över en metod som redan finns
     {
-        return $"{Name} ( {MaxSeats - students.Count} av {MaxSeats} platser)";
+        return $"{Name} ( {MaxSeats - Students.Count} av {MaxSeats} platser)";
     }
 }
