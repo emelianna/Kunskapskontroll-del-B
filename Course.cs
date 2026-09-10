@@ -13,12 +13,24 @@ class Course
 
     public void Enroll(Student newStudent) //Lägger till student
     {
-        if (!Students.Contains(newStudent) && MaxSeats - Students.Count > 0) //Bara om personen inte redan är med
-                                                                                //och om det finns platser kvar
+        
+
+        if (Students.Contains(newStudent))
+        {
+            Console.WriteLine("Denna student är redan anmäld till kursen.");
+        }
+
+        if (MaxSeats - Students.Count > 0)
+        {
+           Console.WriteLine("Tyvärr är denna kursen full, studenten kan inte läggas till."); 
+        }
+
+        else
         {
             Students.Add(newStudent); //Ny student läggs till i studentlistan
             newStudent.Join(this); //Anropar studentens Join-metod, som lägger till kursen i studentens Courses-lista     
         }
+        
     }
 
     public void Remove(Student oldStudent) //Tar bort student
@@ -32,6 +44,12 @@ class Course
 
     public void RollCall() //Listar studenter som läser kursen
     {
+if (Students.Count == 0)
+        {
+            Console.WriteLine("Det är ingen som går denna kursen än. Den är tom.");
+        }
+        else {
+
         Console.WriteLine("Studerande i denna kurs är:");
 
         foreach (Student student in Students)
@@ -39,7 +57,7 @@ class Course
             Console.WriteLine($"- {student.Name}");
         }
     }
-
+}
     public override string ToString() //Gör ett objekt utskrivbart genom att skriva över en metod som redan finns
     {
         return $"{Name} ( {MaxSeats - Students.Count} av {MaxSeats} platser)";

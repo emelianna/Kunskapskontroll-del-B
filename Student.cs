@@ -33,8 +33,15 @@ class Student
     }
 }
 
-public void Schedule()
+public void Schedule() //Metod som skriver ut vilka kurser den studerande går (om den går några)
     {
+if (Courses.Count == 0) 
+        {
+            Console.WriteLine("Du är inte anmäld till några kurser än.");
+        }
+
+        else {
+
         Console.WriteLine($"{Name} går dessa kurser: ");
 
         foreach (Course course in Courses)
@@ -43,5 +50,9 @@ public void Schedule()
         }
     }
 }
-
+public override string ToString() //Gör ett objekt utskrivbart genom att skriva över en metod som redan finns
+    {
+        return $"Studenten heter {Name}";
+    }
+}
 
