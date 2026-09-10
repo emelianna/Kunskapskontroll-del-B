@@ -18,16 +18,26 @@ class Student
 
     public void Join(Course newCourse) 
     {
-        if (!Courses.Contains(newCourse))
+        if (Courses.Contains(newCourse))
         {
+            //Console.WriteLine($"{Name} är redan anmäld till {newCourse.Name}");
+        }
+        else
+        {
+            //Console.WriteLine($"{Name} är nu inskriven i kursen {newCourse.Name}");
             Courses.Add(newCourse); //Ny kurs läggs till i kurslistan
             newCourse.Enroll(this); //Lägger till studenten i kursens studentlista (synkar andra hållet)
         }
     }
     public void Leave(Course oldCourse)
 {
-    if (Courses.Contains(oldCourse))
+    if (!Courses.Contains(oldCourse))
+        {
+            //Console.WriteLine($"{Name} är inte inskriven i {oldCourse.Name} och kan därför inte lämna");
+        }
+        else
     {
+    //Console.WriteLine($"{Name} är nu borttagen från kursen {oldCourse.Name}");
     Courses.Remove(oldCourse); //Kursen tas bort ur studentens egen kurslista
     oldCourse.Remove(this); //Anropar kursens Removemetod som tar bort studenten ur kursens studentlista
     }
@@ -37,7 +47,7 @@ public void Schedule() //Metod som skriver ut vilka kurser den studerande går (
     {
 if (Courses.Count == 0) 
         {
-            Console.WriteLine("Du är inte anmäld till några kurser än.");
+            Console.WriteLine($"{Name} är inte anmäld till några kurser än.");
         }
 
         else {
@@ -52,7 +62,7 @@ if (Courses.Count == 0)
 }
 public override string ToString() //Gör ett objekt utskrivbart genom att skriva över en metod som redan finns
     {
-        return $"Studenten heter {Name}";
+        return $"{Name}";
     }
 }
 
