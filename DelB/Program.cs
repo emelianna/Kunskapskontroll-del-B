@@ -2,12 +2,14 @@
 Student frida = new("Frida Fågelgren");
 Student alfons = new("Alfons Åberg");
 Student silvia = new("Silvia");
+Student vera = new("Vera Félix");
 
 Course hemkunskap = new("Hemkunskap", 2);
 Course kemi = new("Kemi", 4);
 Course matte = new("Matematik", 2);
 Course virkning = new("Virkning", 5);
 
+vera.Join(kemi);
 alfons.Join(virkning);
 frida.Join(virkning);
 frida.Join(virkning);
@@ -16,12 +18,16 @@ alfons.Join(matte);
 silvia.Join(matte);
 frida.Join(matte);
 
+
 alfons.Leave(hemkunskap);
 frida.Leave(virkning);
+
 virkning.Remove(alfons);
+hemkunskap.Enroll(vera);
 
 alfons.Schedule();
 erik.Schedule();
+vera.Schedule();
 
 virkning.RollCall();
 hemkunskap.RollCall();
@@ -33,3 +39,5 @@ Console.WriteLine(virkning);
 Console.WriteLine(hemkunskap);
 Console.WriteLine(matte);
 Console.WriteLine(kemi);
+
+Console.WriteLine(vera);

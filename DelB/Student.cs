@@ -14,40 +14,27 @@ class Student
        public string Name = name;
     }*/
 
-    public List<Course> Courses = []; //Lista med kurser
+    public List<Course> Courses = []; //Studentens lista med kurser
 
-    public void Join(Course newCourse) 
-    {
-        if (Courses.Contains(newCourse))
-        {
-            //Console.WriteLine($"{Name} är redan anmäld till {newCourse.Name}");
-        }
-        else
-        {
-            //Console.WriteLine($"{Name} är nu inskriven i kursen {newCourse.Name}");
-            Courses.Add(newCourse); //Ny kurs läggs till i kurslistan
-            newCourse.Enroll(this); //Lägger till studenten i kursens studentlista (synkar andra hållet)
-        }
-    }
-    public void Leave(Course oldCourse)
-{
-    if (!Courses.Contains(oldCourse))
-        {
-            //Console.WriteLine($"{Name} är inte inskriven i {oldCourse.Name} och kan därför inte lämna");
-        }
-        else
-    {
-    //Console.WriteLine($"{Name} är nu borttagen från kursen {oldCourse.Name}");
-    Courses.Remove(oldCourse); //Kursen tas bort ur studentens egen kurslista
-    oldCourse.Remove(this); //Anropar kursens Removemetod som tar bort studenten ur kursens studentlista
-    }
+    
+    public void Join(Course newCourse) //Fanns mer kod här tidigare, men blev stökigt med fram och tillbaka.
+                                       //Nu sköter Course.Enroll och Course.Remove hela jobbet med att lägga till och ta bort 
+{                                      //Att metoderna i Course sköter det beror på att MaxSeats finns där.  
+    newCourse.Enroll(this);            //"Anropa metoden Enroll på newCourse och skicka med this (studenten) som parameter"
 }
+
+public void Leave(Course oldCourse) //Är egentligen bara en väg till metoden Remove. 
+{
+    oldCourse.Remove(this);         //"Anropa metoden Remove på oldCourse och skicka med this (studenten) som parameter"  
+}
+
+
 
 public void Schedule() //Metod som skriver ut vilka kurser den studerande går (om den går några)
     {
 if (Courses.Count == 0) 
         {
-            Console.WriteLine($"{Name} är inte anmäld till några kurser än.");
+            Console.WriteLine($"{Name} är inte anmäld till några kurser");
         }
 
         else {
@@ -60,7 +47,9 @@ if (Courses.Count == 0)
         }
     }
 }
-public override string ToString() //Gör ett objekt utskrivbart genom att skriva över en metod som redan finns
+public override string ToString() //Gör ett objekt utskrivbart genom att skriva över en metod som redan finns.
+                                   //Console.WriteLine(alfons); skriver ut det nedan, alltså i detta fall 
+                                   //studenten alfons namn. 
     {
         return $"{Name}";
     }
