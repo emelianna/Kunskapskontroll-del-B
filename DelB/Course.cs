@@ -1,6 +1,6 @@
 class Course
-{
-    public string Name;     //fält 
+{                       //fält 
+    public string Name;     
     public int MaxSeats;    
 
     public Course(string name, int maxSeats) //Konstruktorn, returnerar inget. Fyller i objektets fält med startvärden
@@ -9,9 +9,9 @@ class Course
         MaxSeats = maxSeats; 
     }
 
-    public List<Student> Students = [];             //kursens lista med inskrivna studenter 
+    public List<Student> Students = [];       //kursens lista med inskrivna studenter 
 
-    public void Enroll(Student newStudent)          //Anropas också och sköter jobbet med att lägga till när Join körs
+    public void Enroll(Student newStudent)    //Anropas också och sköter jobbet med att lägga till när Join körs
 {
     if (Students.Contains(newStudent))
     {
@@ -46,7 +46,7 @@ public void Remove(Student oldStudent)      //Anropas också och sköter jobbet 
     }
 }
 
-    public void RollCall() //Listar studenter som läser kursen
+    public void RollCall() //Listar studenter som läser kursen (om det finns någon som går den)
     {
 if (Students.Count == 0)
         {
